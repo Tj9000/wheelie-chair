@@ -24,7 +24,7 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
+app.get('DBinit')();
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -47,7 +47,7 @@ function normalizePort(val) {
   }
 
   return false;
-}
+}0
 
 /**
  * Event listener for HTTP server "error" event.
@@ -88,3 +88,14 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+function cleanup(){
+  // app.get('DBcleanup')(function(){
+  //   process.exit(0);
+  // });
+  console.log("Exit DB. Clean. in app.js");
+  app.get('db').close();
+  process.exit(0);
+}
+
+process.on('SIGINT' , cleanup);
+process.on('SIGTERM', cleanup);
