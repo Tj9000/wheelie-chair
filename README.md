@@ -52,7 +52,14 @@ git checkout [branch-name]	-	Switches to the specified branch
 
 USING:
 use remote branch: sprint1 (avoid master)
+setup git:
+git config --global push.default matching
+git config --global user.name <YOUR USER NAME>
+git config --global user.email <EMAIL>
+git config credential.helper store					-- to save your credentials after entering once (saved after it asks for first time)
+(My username is Tj9000 when asked for credientials (@github.com_) ) 
 
+git clone https://github.com/Tj9000/wheelie-chair.git
 git branch (list all branch names)\
 
 git checkout sprint1	- one time setup to change branch name
