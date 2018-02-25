@@ -21,6 +21,7 @@ access from browser with localhost:8888 (or ip of the computer)
 git cheatsheet:
 
 (try a tutorial: https://try.github.io )
+
 (additional: https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf )
 
 git clone <URL>		- to clone the repository (it also created new folder with the repo name)
@@ -38,12 +39,14 @@ git commit -a -m "your message" - adds all files and commitsit with message
 git push origin <BRANCH> - the committed state will be pushed to github repository (push is remote)
 							pushes from origin(local) to specified branch
 git push -u origin <BRANCH> - saves it for next
+
 git push 					- performs push command saved earlier
 
 git pull 					- (pulls from repo, adding any changes)
 
 
 ....................................................................................................
+
 git branch [branch-name]	-	Creates a new branch
 git checkout [branch-name]	-	Switches to the specified branch
 								(use )
@@ -51,23 +54,33 @@ git checkout [branch-name]	-	Switches to the specified branch
 ....................................................................................................
 
 USING:
+
 use remote branch: sprint1 (avoid master)
+
 setup git:
+
 git config --global push.default matching
+
 git config --global user.name <YOUR USER NAME>
+
 git config --global user.email <EMAIL>
+
 git config credential.helper store					-- to save your credentials after entering once (saved after it asks for first time)
-(My username is Tj9000 when asked for credientials (@github.com_) ) 
 
 git clone https://github.com/Tj9000/wheelie-chair.git
+
 git branch (list all branch names)\
 
 git checkout sprint1	- one time setup to change branch name
 
-everytime do:
+Everytime do:
+
 git status 	- to check status of current working set
+
 git diff 	- use IF you want to check/verify changes
+
 git add <FILES> - if you want to explictily add files to commit. use "git add ." to add all files
+
 git commit -a -m "message"
 
 git pull (to make sure you have updated other files)
