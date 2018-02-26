@@ -1,0 +1,10 @@
+sudo::
+
+hcitools
+rfcomm
+rfcomm bing 0 <sddr> 1
+rfcomm connect /dev/rfcomm0 <addr>
+
+cu -l /dev/rfcomm0 <baudrate>
+
+pyttu ->

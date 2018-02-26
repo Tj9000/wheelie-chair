@@ -1,0 +1,42 @@
+apt-get install libbluetooth-dev
+rfkill unblock bluetooth //for error setting bt
+sudo bluetoothctl :
+	discoverable on
+	scan on
+	scan stop 
+	import bluetooth
+	power on
+	agent on
+	scan on
+	pair xx:xx:xx:xx:xx:xx
+	connect xx:xx:xx:xx:xx:xx
+	trust xx:xx:xx:xx:xx:xx
+
+hciconfig
+hcitool scan
+
+sudo nano /etc/bluetooth/rfcomm.conf :
+	rfcomm1 {
+    	bind yes;
+		device xx:xx:xx:xx:xx:xx;
+		channel 1;
+		comment "Connection to Bluetooth serial module";
+	}
+
+sudo rfcomm bind all
+
+or just
+sudo rfcomm bind 0 30:14:06:16:10:45 1
+sudo rfcomm connect hci0 30:14:06:16:10:45
+
+
+Note that i'm able to connect to my arduino module using the command "sudo rfcomm connect hci0 XX:XX:XX:XX:XX:XX" which return me that i'm connected :
+
+Python:
+	sudo pip install pybluez
+	sudo pip install wakeonlan
+	sudo pop install paho-mqtt
+sudo apt install mosquitto mosquitto-clients 	
+
+server: mosquitto -p 9010
+
