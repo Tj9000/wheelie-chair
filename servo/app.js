@@ -50,12 +50,13 @@ app.use(function(err, req, res, next) {
 
 app.set('DBinit',function(){
   	db.serialize(function () {
-	  db.run('CREATE TABLE vehicles (uid INTEGER PRIMARY KEY, type TEXT, position TEXT, status TEXT, location TEXT)');
-	  var stmt = db.prepare('INSERT INTO vehicles VALUES(?,?,?,?,?)');
+	  db.run('CREATE TABLE vehicles (uid INTEGER PRIMARY KEY, type TEXT, location TEXT, status TEXT, position TEXT,'+
+	  	'IP TEXT, MAC TEXT,commId TEXT, commType TEXT)');
+	  var stmt = db.prepare('INSERT INTO vehicles(uid,type,position,status,location) VALUES(?,?,?,?,?)');
 
 	    stmt.run(10001	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
 	    stmt.run(10002	,'CART'		,'a'	,'BUSY'			,'FLOOR1'	);
-	    stmt.run(10003	,'CART'		,'b'	,'BUSY'			,'FLOOR1'	);
+	    stmt.run(10003	,'CART'		,'b'	,'AVAIL'			,'FLOOR1'	);
 	    stmt.run(10004	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
 	    stmt.run(10005	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
 	  stmt.finalize();
