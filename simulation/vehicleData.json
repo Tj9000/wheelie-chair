@@ -1,0 +1,21 @@
+{
+	"type":[
+		"WheelChair",
+		"Ambulance",
+		"Stretcher"
+	],
+	"location":[
+		"FLOOR1",
+		"FLOOR2",
+		"BAY",
+		"PARKING",
+		"BLOCK-A",
+		"BLOCK-B"
+	],
+	"status":[
+		"CHARGING",
+		"AVAIL",
+		"BUSY"
+	],
+	"position":["a","b","c","d","e","f","g","h","i","j"]
+}

@@ -35,8 +35,9 @@ Note that i'm able to connect to my arduino module using the command "sudo rfcom
 Python:
 	sudo pip install pybluez
 	sudo pip install wakeonlan
-	sudo pop install paho-mqtt
+	sudo pip install paho-mqtt
 sudo apt install mosquitto mosquitto-clients 	
 
 server: mosquitto -p 9010
 
+mosquitto_pub -h localhost -p 9010 -t "ASST/carinp" -m "B20"

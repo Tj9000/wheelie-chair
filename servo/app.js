@@ -9,6 +9,24 @@ var sqlite3 = require('sqlite3').verbose();
 var index = require('./routes/index');
 var users = require('./routes/users');
 var simulation = require('./routes/simulation');
+var mqtt = require('mqtt');
+
+var client  = mqtt.connect('mqtt://localhost:10250');
+client.on('connect', function () {
+  client.subscribe({'register':1});
+  // console.log('subscribed');
+});
+client.on('message', function (topic, message) {
+  // message is Buffer
+  var msg=message.toString();
+  console.log(msg)
+  var inserts = msg.split(',')
+  db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts);
+  // client.publish("registrationStat/"+inserts[0], "ACCEPTED");
+});
+
+
+
 
 var app = express();
 
@@ -67,5 +85,7 @@ app.set('DBinit',function(){
 	});
 });
 
-
+app.set('sendMQTTcommand',function(uid,cmd){
+	client.publish('ASST/'+uid,cmd);
+});
 module.exports = app;

@@ -82,6 +82,7 @@ router.get('/requestVehi', function(req, res, next) {
 router.get('/command', function(req, res, next) {
 	console.log(req.query.uid);
 	console.log(req.query.command);
+	req.app.get('sendMQTTcommand')(req.query.uid,req.query.command);
 	res.status(200);
 	res.end();
 });
