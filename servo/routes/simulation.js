@@ -7,6 +7,9 @@ var router = express.Router();
 router.get('/', function(req, res,next) {
 	  res.render('simulation/status', { title: 'Devices Connected'});
 });
+router.get('/req', function(req, res,next) {
+	  res.render('simulation/command', { title: 'Request services'});
+});
 router.get('/getAllInfo', function(req, res, next) {
 	req.app.get('db').all('SELECT uid,type,position,status,location FROM vehicles', function(err,rows){
 		res.send(JSON.stringify(rows));
