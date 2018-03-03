@@ -1,0 +1,5 @@
+image==1.5.16
+numpy==1.13.3
+picamera==1.13
+pygame==1.9.3
+
