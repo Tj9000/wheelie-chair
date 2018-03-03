@@ -48,7 +48,8 @@ def getIPs():
 
   for el in check_results:
     el.join()
-    if(el.status() == 'alive'):
+    # print el.ip,el.status()
+    if('alive' in el.status()):
       onlineHosts.append(el.ip)
   return onlineHosts
 

@@ -1,4 +1,6 @@
 node_modules/
 README.sublime-workspace
 npm-debug.log
-
+*.pyc
+simulation/*.pyc
+assets/*.pyc

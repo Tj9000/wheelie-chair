@@ -7,9 +7,22 @@ var router = express.Router();
 router.get('/', function(req, res,next) {
 	  res.render('simulation/status', { title: 'Devices Connected'});
 });
+router.get('/req', function(req, res,next) {
+	  res.render('simulation/command', { title: 'Request services'});
+});
 router.get('/getAllInfo', function(req, res, next) {
 	req.app.get('db').all('SELECT uid,type,position,status,location FROM vehicles', function(err,rows){
 		res.send(JSON.stringify(rows));
+		res.end;
+	});
+});
+router.get('/getUIDs', function(req, res, next) {
+	req.app.get('db').all('SELECT uid FROM vehicles', function(err,rows){
+		var x=[];
+		for (var i = 0; i < rows.length; i++) {
+			x.push(rows[i].uid)
+		}
+		res.send(JSON.stringify(x));
 		res.end;
 	});
 });

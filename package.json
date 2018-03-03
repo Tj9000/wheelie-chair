@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "PORT=8888 node ./servo/bin/www ",
     "start-win": "set PORT=8888 && node ./servo/bin/www ",
-    "simulation": "python simulation/simulation.py"
+    "simulation": "python simulation/simulation.py",
+    "build-sim": "pip install -r simulation/requirement-simulation.txt",
+    "build-pi": "pip install -r PI/requirement-pi.txt && python PI/config.py",
+    "pi-config": "python PI/config.py"
   },
   "repository": {
     "type": "git",

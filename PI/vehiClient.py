@@ -5,17 +5,19 @@ import socket
 import ipaddress
 import subprocess
 import time
-import json
 
 import sys
 sys.path.append('./assets')
+
 import findIP
 
-uid=sys.argv[1]
-typ=sys.argv[2]
-loc=sys.argv[3]
-status=sys.argv[4]
-pos=sys.argv[5]
+vehicleData = json.load(open('PI/CONFIG.json'))
+
+uid     = vehicleData["uid"]
+typ     = vehicleData["type"]
+loc     = vehicleData["location"]
+status  = vehicleData["status"]
+pos     = vehicleData["position"]
 
 VehiDetailArg=','.join(sys.argv[1:])
 class CarClient:

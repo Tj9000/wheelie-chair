@@ -1,2 +1,0 @@
-pip install ipaddress
-pip install paho-mqtt
