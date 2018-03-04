@@ -18,7 +18,7 @@ loc     = vehicleData["location"]
 status  = vehicleData["status"]
 pos     = vehicleData["position"]
 
-VehiDetailArg=','.join(sys.argv[1:])
+VehiDetailArg=[uid,typ,loc,status,pos]
 class CarClient:
     def __init__(self):
         self.vehi=BTvehicle.BTvehicle()
