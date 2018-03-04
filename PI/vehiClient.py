@@ -6,7 +6,8 @@ import ipaddress
 import subprocess
 import time
 import sys
-# sys.path.append('./assets')
+import json
+sys.path.append('./assets')
 
 import findIP
 
