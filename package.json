@@ -1,4 +1,4 @@
-{
+ {
   "name": "wheelie-chair",
   "version": "1.0.0",
   "description": "'",
@@ -10,7 +10,7 @@
     "simulation": "python simulation/simulation.py",
     "build-sim": "pip install -r simulation/requirement-simulation.txt",
     "build-pi": "pip install -r PI/requirement-pi.txt && python PI/config.py",
-    "pi-config": "python PI/config.py"
+    "pi-config": "python assets/config.py"
   },
   "repository": {
     "type": "git",

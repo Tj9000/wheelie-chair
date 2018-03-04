@@ -11,8 +11,23 @@ Have node, npm installed and configured in path.
 
 Use 'npm install' to install required pacakges
 
-use npm start to start express server --currently configures for front end UI
-
+Use 'npm start' to start express server --currently configures for front end UI
 access from browser with localhost:8888 (or ip of the computer)
 
 (Refer git cheetsheet txt for git instructions)
+
+useful commands:
+
+npm start
+
+npm run start-win
+
+npm run build-sim
+
+npm run simulation
+
+npm run build-pi
+
+npm run pi-config
+
+npm run pi-config -- [ uid [ type [ location [ status [ position ] ] ] ] ]

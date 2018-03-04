@@ -1,7 +1,7 @@
 import sys
 import random
 import json
-vehicleData = json.load(open('PI/vehicleData.json'))
+vehicleData = json.load(open('assets/vehicleData.json'))
 
 arglen = len(sys.argv)
 if len(sys.argv) == 2 and sys.argv[1] == 'help' :
@@ -9,10 +9,11 @@ if len(sys.argv) == 2 and sys.argv[1] == 'help' :
 	print("npm run pi-config -- [ uid [ type [ location [ status [ position ] ] ] ] ]")
 	sys.exit(0)
 
-vId			=	sys.argv[1] if(arglen>1) else '100'+str(random.randint(100000,999999))
+vId			=	sys.argv[1] if(arglen>1) else '200'+str(random.randint(100000,999999))
 vType		=	sys.argv[2] if(arglen>2) else random.choice(vehicleData["type"])
 vLoc		=	sys.argv[3] if(arglen>3) else random.choice(vehicleData["location"])
-vStatus		=	sys.argv[4] if(arglen>4) else random.choice(vehicleData["status"])
+# vStatus		=	sys.argv[4] if(arglen>4) else random.choice(vehicleData["status"])
+vStatus		=	'AVAIL'
 vPosition	=	sys.argv[5] if(arglen>5) else random.choice(vehicleData["position"])
 
 print "configured vehicle with: "
