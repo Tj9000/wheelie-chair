@@ -1,0 +1,4 @@
+simple-json
+ipaddress
+paho-mqtt
+python-nmap

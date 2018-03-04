@@ -1,6 +1,7 @@
 import os, re, threading
 import socket
 import ipaddress
+import nmap
 
 class ip_check(threading.Thread):
    def __init__ (self,ip):
@@ -35,22 +36,26 @@ def getIPs():
   # net_addr=u'.'.join(net_addr) + u'/24'
   s.close()
 
+  onlineHosts=[]
+  nm = nmap.PortScanner()
+  scanList=nm.scan('192.168.0.1/24',arguments='-sP')
+  for i in scanList["scan"]:
+    onlineHosts.append(i)
   # ip_net = ipaddress.ip_network(net_addr)
   # all_hosts = list(ip_net.hosts())
-  onlineHosts=[]
-  check_results = []
-  for i in range(1,254):
-    ip = net_addr+str(i)
-    # ip = str(host)
-    current = ip_check(ip)
-    check_results.append(current)
-    current.start()
+  # check_results = []
+  # for i in range(1,254):
+  #   ip = net_addr+str(i)
+  #   current = ip_check(ip)
+  #   check_results.append(current)
+  #   current.start()
 
-  for el in check_results:
-    el.join()
-    # print el.ip,el.status()
-    if('alive' in el.status()):
-      onlineHosts.append(el.ip)
+  # for el in check_results:
+  #   el.join()
+  #   # print el.ip,el.status()
+  #   if('alive' in el.status()):
+  #     onlineHosts.append(el.ip)
+
   return onlineHosts
 
 

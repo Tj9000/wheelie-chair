@@ -6,7 +6,7 @@ import ipaddress
 import subprocess
 import time
 import sys
-sys.path.append('./assets')
+# sys.path.append('./assets')
 
 import findIP
 
