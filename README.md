@@ -31,3 +31,5 @@ npm run build-pi
 npm run pi-config
 
 npm run pi-config -- [ uid [ type [ location [ status [ position ] ] ] ] ]
+
+npm run wheelchair

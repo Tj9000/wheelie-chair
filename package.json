@@ -10,7 +10,8 @@
     "simulation": "python simulation/simulation.py",
     "build-sim": "pip install -r simulation/requirement-simulation.txt",
     "build-pi": "pip install -r PI/requirement-pi.txt && python PI/config.py",
-    "pi-config": "python assets/config.py"
+    "pi-config": "python assets/config.py",
+    "wheelchair": "python PI/vehiClient.py"
   },
   "repository": {
     "type": "git",
