@@ -3,13 +3,14 @@ import BTvehicle
 import sys
 import socket
 import ipaddress
-import subprocess
+import threading
 import time
 import sys
 import json
 sys.path.append('./assets')
 
 import findIP
+from ImgPr import camClient
 
 vehicleData = json.load(open('PI/CONFIG.json'))
 uid     = vehicleData["uid"]
@@ -67,7 +68,21 @@ class CarClient:
         except:
             return False
     def msgParser(self,msg):
-        self.vehi.sendMsg(str(msg.payload))
+        if msg=='START_CAM':
+            self.startCam()
+        elif msg=='STOP_CAM':
+            self.stopCam()
+            pass
+        else:
+            self.vehi.sendMsg(str(msg.payload))
+
+    def startCam(self):
+        self.camClient=camClient()
+        self.camClient.start()
+    def stopCam(self):
+        self.camClient.stop()
+
+
         
 
 

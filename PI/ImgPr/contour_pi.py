@@ -1,25 +1,26 @@
-def contour:
-    from __future__ import division
+from __future__ import division
 
-    import cv2
-    import numpy as np
+import cv2
+import numpy as np
 
-    # import the necessary packages
-    from picamera.array import PiRGBArray
-    from picamera import PiCamera
-    import time
-    import cv2
+# import the necessary packages
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import time
+import cv2
 
-    # initialize the camera and grab a reference to the raw camera capture
-    camera = PiCamera()
-    rawCapture = PiRGBArray(camera)
+    # # initialize the camera and grab a reference to the raw camera capture
+    # camera = PiCamera()
+    # rawCapture = PiRGBArray(camera)
 
-    # allow the camera to warmup
-    time.sleep(0.1)
+    # # allow the camera to warmup
+    # time.sleep(0.1)
 
-    # grab an image from the camera
-    camera.capture(rawCapture, format="bgr")
-    image = rawCapture.array
+    # # grab an image from the camera
+    # camera.capture(rawCapture, format="bgr")
+    # image = rawCapture.array
+def contour(image):
+
 
     # Convert to HSV color space
     hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
@@ -59,4 +60,7 @@ def contour:
 
     cv2.imshow("Result",image)
 
-    cv2.waitKey(0)
+    key = cv2.waitKey(1)  & 0xFF  #for 64 bit
+    if key == ord('q'):
+        return False
+    return True
