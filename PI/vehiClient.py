@@ -19,7 +19,7 @@ loc     = vehicleData["location"]
 status  = vehicleData["status"]
 pos     = vehicleData["position"]
 
-VehiDetailArg=[uid,typ,loc,status,pos]
+VehiDetailArg=','.join([uid,typ,loc,status,pos])
 class CarClient:
     def __init__(self):
         self.vehi=BTvehicle.BTvehicle()
@@ -76,10 +76,10 @@ class CarClient:
             self.stopCam()
             pass
         else:
-            self.vehi.sendMsg(str(msg.payload))
+            self.vehi.sendMsg(msg)
 
     def startCam(self):
-        self.camClient=camClient()
+        self.camClient=camClient.ImageReader()
         self.camClient.start()
     def stopCam(self):
         self.camClient.stop()

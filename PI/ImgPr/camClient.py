@@ -13,9 +13,11 @@ class ImageReader(threading.Thread):
         threading.Thread.__init__(self)
         self.camera = picamera.PiCamera()
         self.camera.resolution = (1024, 768)
-        self.camera.framerate = 16
+        self.camera.framerate = 2
         self.camera.vflip = vflip
         self.camera.hflip = hflip
+        self.showImage=True
+        self.drawContour=True
         self.rawCapture = PiRGBArray(self.camera, size=(1024, 768))
         # allow the camera to warmup
         time.sleep(0.1)
@@ -37,19 +39,20 @@ class ImageReader(threading.Thread):
             for frame in self.camera.capture_continuous(self.rawCapture, format="bgr", use_video_port=True):
                 # grab the raw NumPy array representing the image, then initialize the timestamp
                 # and occupied/unoccupied text
-                image = frame.array.copy()
+                #image = frame.array.copy()
+                image = self.rawCapture.array.copy()
                 
                 # show the frame
                 if(self.drawContour and self.showImage):
-                    if not contour_pi(image):
+                    if not contour_pi.contour(image):
                         break
                 elif(self.showImage):
                     cv2.imshow("Frame", image)
                     key = cv2.waitKey(1)  & 0xFF  #for 64 bit
                     if key == ord('q'):
                         return(False,'Quit','Quit')
-                if not self.camClientOn:
-                    break
+                #if not self.camClientOn:
+                #    break
                 # clear the stream in preparation for the next frame
                 self.rawCapture.truncate(0)
         finally:
