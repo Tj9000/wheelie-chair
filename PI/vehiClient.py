@@ -7,6 +7,7 @@ import threading
 import time
 import sys
 import json
+import Queue
 sys.path.append('./assets')
 
 import findIP
@@ -22,7 +23,8 @@ pos     = vehicleData["position"]
 VehiDetailArg=','.join([uid,typ,loc,status,pos])
 class CarClient:
     def __init__(self):
-        self.vehi=BTvehicle.BTvehicle()
+        self.q=Queue.queue()
+        self.vehi=BTvehicle.BTvehicle(self.q)
         self.PORT=10250
         self.HOST=False
         while not self.HOST:
@@ -76,7 +78,15 @@ class CarClient:
             self.stopCam()
             pass
         else:
-            self.vehi.sendMsg(msg)
+            m=msg.split()
+            if len(m)==1:
+                self.vehi.sendMsg(msg)
+            else:
+                for i in m:
+                    self.vehi.sendMsg(i,True)
+                    self.q.get()
+
+
 
     def startCam(self):
         self.camClient=camClient.ImageReader()

@@ -2,7 +2,9 @@ import bluetooth
 import threading
 
 class BTvehicle:
-    def __init__(self):
+    def __init__(self,queue):
+        self.q=queue
+        self.sendMsg=False
         self.vehiMAC= '30:14:06:16:10:45'
         self.port = 1
         self.s = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
@@ -27,3 +29,7 @@ class BTvehicle:
             data = self.s.recv(1024)
             if(data):
                 print data
+            if('Done' in data):
+                if(self.sendMsg):
+                    q.put('Done');
+
