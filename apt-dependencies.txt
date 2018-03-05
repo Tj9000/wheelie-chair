@@ -1,0 +1,8 @@
+python
+pip
+nodejs
+nodejs-legacy
+npm
+mosquitto
+mosquitto-clients
+nmap
