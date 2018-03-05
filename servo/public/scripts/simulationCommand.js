@@ -81,7 +81,11 @@ function commandd(){
 				console.log(JSON.parse(res));
 				var dj=JSON.parse(res);
 				var ele = document.getElementById('uid');
-           
+				ele.innerHTML='';
+				var option = document.createElement('option');
+				option.innerHTML='-- Select --';
+				option.value = '';
+				ele.appendChild(option);
 				for(var i = 0; i < dj.length; i++){
 				var option = document.createElement('option');
 				option.innerHTML=dj[i];
@@ -99,16 +103,15 @@ function comm2(){
 				var uid=document.getElementById("uid").value;
 				var command=document.getElementById("command").value;
 	
-				var xhre = new XMLHttpRequest()
-				xhre.open('GET','/sim/command?uid='+uid+'&command=' +command,true);
-				xhre.send();
-				xhre.onreadystatechange=function(){
-								if(xhre.readyState==4){	
-										if(xhre.status == 200){
-											var ress =xhre.responseText;	
-											console.log(JSON.parse(ress));
+				var xhr = new XMLHttpRequest()
+				xhr.open('GET','/sim/command?uid='+uid+'&command=' +command,true);
+				xhr.send();
+				xhr.onreadystatechange=function(){
+								if(xhr.readyState==4){	
+										if(xhr.status == 200){
+											var ress =xhr.responseText;	
 				
-											var dj1=JSON.parse(ress);
+											/*var dj1=JSON.parse(ress);
 											var tbl = document.getElementById("resultc1");
 											var tblBody = document.createElement("tbody");
 											for(var i=0;i<dj1.length;i++){
@@ -144,7 +147,7 @@ function comm2(){
 														}
 											tblBody.appendChild(row);					
 											tbl.appendChild(tblBody);
-											
+											*/
 				
 														}
 												}	
