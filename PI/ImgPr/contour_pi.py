@@ -40,7 +40,8 @@ def contour(image):
     dilated_mask = cv2.dilate(eroded_mask, kernel_dilate, iterations=1)
 
     # Find the different contours
-    im2, contours, hierarchy = cv2.findContours(dilated_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+   # im2, contours, hierarchy = cv2.findContours(dilated_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy = cv2.findContours(dilated_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     if len(contours) != 0:
 

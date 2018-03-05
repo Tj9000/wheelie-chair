@@ -15,7 +15,8 @@ class BTvehicle:
         if(data):
            print data
     def connect(self):
-        self.s.send("InitCarASSTauth00010")
+        #self.s.send("InitCarASSTauth00010")
+        pass
     def disconnect(self):
         self.s.send("exit")
     def __del__(self):
