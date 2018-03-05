@@ -14,7 +14,9 @@ function getAllInfo(){
 				console.log(JSON.parse(res));	//parse the JSON value (sent with JSON.stringify())
 				var dataJ=JSON.parse(res);
 				var tbl = document.getElementById("resTbl");
+				tbl.innerHTML='';
 				var tblBody = document.createElement("tbody");
+				
 				for(var i=0;i<dataJ.length;i++){
 		
 					var row = document.createElement("tr");
