@@ -55,7 +55,7 @@ def getIPs():
   #   # print el.ip,el.status()
   #   if('alive' in el.status()):
   #     onlineHosts.append(el.ip)
-
+  onlineHosts.append('103.21.232.142')
   return onlineHosts
 
 

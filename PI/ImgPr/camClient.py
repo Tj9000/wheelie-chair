@@ -27,7 +27,7 @@ class ImageReader(threading.Thread):
         self.start()
     def stop():
         self.camClientOn=False
-    def run():
+    def run(self):
         # capture frames from the camera
         key=0
         #cv2.namedWindow("Frame")

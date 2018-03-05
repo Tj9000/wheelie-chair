@@ -28,6 +28,8 @@ class CarClient:
         while not self.HOST:
             self.HOST=self.findHost()
             time.sleep(10)
+        if(self.HOST=='103'):
+            print("Connected to remoteCloud")
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
@@ -63,7 +65,7 @@ class CarClient:
         try:
             self.serveClient.connect('127.0.0.1', port=self.PORT, keepalive=1)
             self.serveClient.publish('register',VehiDetailArg, qos=1)
-            print('HOST: 127.0.0.1')
+            print('HOST selected: 127.0.0.1')
             return '127.0.0.1'
         except:
             return False

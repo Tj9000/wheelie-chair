@@ -6,3 +6,4 @@ npm
 mosquitto
 mosquitto-clients
 nmap
+python-opencv

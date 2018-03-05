@@ -24,6 +24,8 @@ class CarClient:
         self.registerComplete=False
         self.PORT=10250
         self.HOST=self.findHost()
+        if(self.HOST[:3]=='103'):
+            print("connected to remote cloud")
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message

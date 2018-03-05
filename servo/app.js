@@ -21,7 +21,18 @@ client.on('message', function (topic, message) {
   var msg=message.toString();
   console.log(msg)
   var inserts = msg.split(',')
-  db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts);
+
+  db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts,function(err){
+    if(err){
+      db.run('DELETE from vehicled where uid=?',[inserts[0]],function(err){
+        if(!err){
+          db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts,function(err){
+            
+          });
+        }
+      });
+    }
+  });
   // client.publish("registrationStat/"+inserts[0], "ACCEPTED");
 });
 
