@@ -23,7 +23,7 @@ pos     = vehicleData["position"]
 VehiDetailArg=','.join([uid,typ,loc,status,pos])
 class CarClient:
     def __init__(self):
-        self.q=Queue.queue()
+        self.q=Queue.Queue()
         self.vehi=BTvehicle.BTvehicle(self.q)
         self.PORT=10250
         self.HOST=False
@@ -80,11 +80,12 @@ class CarClient:
         else:
             m=msg.split()
             if len(m)==1:
-                self.vehi.sendMsg(msg)
+                self.vehi.sendMsg(msg,False)
             else:
                 for i in m:
                     self.vehi.sendMsg(i,True)
-                    self.q.get()
+                    x=self.q.get()
+                    print("Done :",i)
 
 
 

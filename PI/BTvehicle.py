@@ -4,18 +4,35 @@ import threading
 class BTvehicle:
     def __init__(self,queue):
         self.q=queue
-        self.sendMsg=False
+        self.sendM=False
         self.vehiMAC= '30:14:06:16:10:45'
         self.port = 1
         self.s = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
         self.s.connect((self.vehiMAC, self.port))
         t1 = threading.Thread(target=self.recvMsg)
-        t1.start()
-    def sendMsg(self,msg):
-        self.s.send(msg)
-        data = self.s.recv(1024)
-        if(data):
-           print data
+        #t1.start()
+    def sendMsg(self,msg,ret):
+        self.sendM=ret
+        a=msg
+	i=0
+        self.s.send(a)
+	i=i+1
+	while(True):
+            data=self.s.recv(1024)
+            d=data.split()
+            if(data):
+                if "Done" in d:
+               	       # if i < len(a):
+                            self.q.put(data)
+                            break
+                        #if i == len(a):
+                           # self.q.put(data)
+                           # break
+        #print('Finished')                
+        #self.s.send(msg)
+        #data = self.s.recv(1024)
+        #if(data):
+           #print data
     def connect(self):
         #self.s.send("InitCarASSTauth00010")
         pass
@@ -30,6 +47,7 @@ class BTvehicle:
             if(data):
                 print data
             if('Done' in data):
-                if(self.sendMsg):
-                    q.put('Done');
+                if(self.sendM):
+                    self.q.put('Done');
+                    self.sendM=False
 
