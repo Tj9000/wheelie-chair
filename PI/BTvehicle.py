@@ -10,13 +10,29 @@ class BTvehicle:
         self.s = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
         self.s.connect((self.vehiMAC, self.port))
         t1 = threading.Thread(target=self.recvMsg)
-        t1.start()
+        #t1.start()
     def sendMsg(self,msg,ret):
         self.sendM=ret
-        self.s.send(msg)
-        data = self.s.recv(1024)
-        if(data):
-           print data
+        a=msg
+	i=0
+        self.s.send(a)
+	i=i+1
+	while(True):
+            data=self.s.recv(1024)
+            d=data.split()
+            if(data):
+                if "Done" in d:
+               	       # if i < len(a):
+                            self.q.put(data)
+                            break
+                        #if i == len(a):
+                           # self.q.put(data)
+                           # break
+        #print('Finished')                
+        #self.s.send(msg)
+        #data = self.s.recv(1024)
+        #if(data):
+           #print data
     def connect(self):
         #self.s.send("InitCarASSTauth00010")
         pass

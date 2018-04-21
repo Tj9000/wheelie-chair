@@ -84,7 +84,8 @@ class CarClient:
             else:
                 for i in m:
                     self.vehi.sendMsg(i,True)
-                    self.q.get()
+                    x=self.q.get()
+                    print("Done :",i)
 
 
 
