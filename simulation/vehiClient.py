@@ -36,6 +36,7 @@ class CarClient:
         # self.car.connect()
         # Subscribing in on_connect() means that if we lose the connection and reconnect then subscriptions will be renewed.
         self.client.subscribe("ASST/"+uid)
+        # self.client.subscribe("ASST/"+uid)
         # self.regWithHost();
 
     # The callback for when a PUBLISH message is received from the server.
@@ -65,8 +66,9 @@ class CarClient:
     	return '127.0.0.1'
     def regWithHost(self):
     	while(not self.registerComplete):
-	    	self.serveClient.publish('register',VehiDetailArg, qos=1)
-	    	time.sleep(10)
+            print("Attempting registering")
+            self.serveClient.publish('register',VehiDetailArg, qos=1)
+            time.sleep(10)
     def on_message_reg(self,client, userdata, msg):
     	if msg.payload=='ACCEPTED':
             self.registerComplete=True

@@ -100,4 +100,13 @@ router.get('/command', function(req, res, next) {
 	res.end();
 });
 
+router.get('/direction',function(req,res,next){
+	console.log(req.query);
+	let mapHelper =require('../helpers/mapHelper')
+	console.log(mapHelper.getPath('floor1',req.query.from,req.query.to));
+	console.log(mapHelper.getDirections('floor1',req.query.from,req.query.to));
+	res.status(200);
+	res.end();
+});
+
 module.exports = router;

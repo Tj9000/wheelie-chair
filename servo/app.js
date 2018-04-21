@@ -25,12 +25,13 @@ client.on('message', function (topic, message) {
   db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts,function(err){
     if(err){
       db.run('DELETE from vehicled where uid=?',[inserts[0]],function(err){
+        }
+      );
         if(!err){
           db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts,function(err){
             
           });
         }
-      });
     }
   });
   // client.publish("registrationStat/"+inserts[0], "ACCEPTED");
@@ -84,8 +85,8 @@ app.set('DBinit',function(){
 	  var stmt = db.prepare('INSERT INTO vehicles(uid,type,position,status,location) VALUES(?,?,?,?,?)');
 
 	    stmt.run(10001	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
-	    stmt.run(10002	,'CART'		,'a'	,'BUSY'			,'FLOOR1'	);
-	    stmt.run(10003	,'CART'		,'b'	,'AVAIL'			,'FLOOR1'	);
+	    stmt.run(10002	,'CART'		,'A'	,'BUSY'			,'FLOOR1'	);
+	    stmt.run(10003	,'CART'		,'B'	,'AVAIL'			,'FLOOR1'	);
 	    stmt.run(10004	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
 	    stmt.run(10005	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
 	  stmt.finalize();

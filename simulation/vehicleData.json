@@ -17,5 +17,5 @@
 		"AVAIL",
 		"BUSY"
 	],
-	"position":["a","b","c","d","e","f","g","h","i","j","k","l","m"]
+	"position":["A","B","C","D","E","F","ward1","ward2","icu1","icu2","lift"]
 }
