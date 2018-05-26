@@ -14,7 +14,7 @@ for i in range(noOfVehi):
 	vType		=random.choice(vehicleData["type"])
 	vLoc		=random.choice(vehicleData["location"])
 	vStatus		=random.choice(vehicleData["status"])
-	vPosition	=random.choice(vehicleData["position"])
+	vPosition	= 'X' if (vLoc=='PARKING' or vLoc=='BAY') else random.choice(vehicleData["position"])
 	vId			='100'+str(i)+str(random.randint(10000,99999))
 
 	vehicles.append([vId,vType,vLoc,vStatus,vPosition])

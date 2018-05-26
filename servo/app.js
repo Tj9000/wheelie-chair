@@ -24,7 +24,7 @@ client.on('message', function (topic, message) {
 
   db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts,function(err){
     if(err){
-      db.run('DELETE from vehicled where uid=?',[inserts[0]],function(err){
+      db.run('DELETE from vehicles where uid=?',[inserts[0]],function(err){
         }
       );
         if(!err){
@@ -82,14 +82,14 @@ app.set('DBinit',function(){
   	db.serialize(function () {
 	  db.run('CREATE TABLE vehicles (uid INTEGER PRIMARY KEY, type TEXT, location TEXT, status TEXT, position TEXT,'+
 	  	'IP TEXT, MAC TEXT,commId TEXT, commType TEXT)');
-	  var stmt = db.prepare('INSERT INTO vehicles(uid,type,position,status,location) VALUES(?,?,?,?,?)');
+	  // var stmt = db.prepare('INSERT INTO vehicles(uid,type,position,status,location) VALUES(?,?,?,?,?)');
 
-	    stmt.run(10001	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
-	    stmt.run(10002	,'CART'		,'A'	,'BUSY'			,'FLOOR1'	);
-	    stmt.run(10003	,'CART'		,'B'	,'AVAIL'			,'FLOOR1'	);
-	    stmt.run(10004	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
-	    stmt.run(10005	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
-	  stmt.finalize();
+	    // stmt.run(10001	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
+	    // stmt.run(10002	,'CART'		,'A'	,'BUSY'			,'FLOOR1'	);
+	    // stmt.run(10003	,'CART'		,'B'	,'AVAIL'			,'FLOOR1'	);
+	    // stmt.run(10004	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
+	    // stmt.run(10005	,'CART'		,'0'	,'CHARGING'		,'BAY'		);
+	  // stmt.finalize();
 	  db.each('SELECT uid,type,position,status,location FROM vehicles', function (err, row) {
 	    	console.log(row.uid,row.type,row.position,row.status,row.location);
 	  	});

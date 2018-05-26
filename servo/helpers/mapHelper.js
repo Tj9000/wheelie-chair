@@ -47,6 +47,7 @@ function getDirections(floor,from,to){
 	let prev= L[0][0];
 	L[0][0]='F'
 	for (var i = 1; i < L.length; i++) {
+		let next = dirResolver[prev][L[i][0]];
 		prev = L[i][0]
 		L[i][0]=next;
 
@@ -67,7 +68,18 @@ function getDirections(floor,from,to){
 	return op;
 }
 
+function getShortestPathFrom(src){
+}
+function getPathCost(floor,a,b) {
+	var Graph = require('node-dijkstra')
+	var route = new Graph(require('../maps/'+floor+'_map'))
+	let cost = 	route.path(a,b,{cost:true}).cost;
+	return cost?cost:Infinity
+}
+
 module.exports={
 	getPath,
-	getDirections
+	getDirections,
+	getShortestPathFrom,
+	getPathCost
 }

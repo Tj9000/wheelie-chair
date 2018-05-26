@@ -11,7 +11,8 @@
     "build-sim": "pip install -r simulation/requirement-simulation.txt",
     "build-pi": "pip install -r PI/requirement-pi.txt && python assets/config.py",
     "pi-config": "python assets/config.py",
-    "wheelchair": "python PI/vehiClient.py"
+    "wheelchair": "python PI/vehiClient.py",
+    "mqtt_broker": "mosquitto -p 10250 "
   },
   "repository": {
     "type": "git",

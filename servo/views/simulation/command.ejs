@@ -8,39 +8,47 @@
   <body>
     <h1><%= title %></h1>   
     <p>Welcome to <%= title %></p> 
+	
 	<div>
-	<select id="user" size="1">	
-	<option>Doctor</option>
-    <option>Nurse</option>
-	</select>
-	<hr/>
-	<select id="type" size="1">
-  <option>CART</option>
-  <option>Ambulance</option>
-  <option>St</option>
-</select>
-	<hr/>
-    <input type="text" id="loc" name="loc1">
-	<hr/>
-    <input type="text" id="pos" name="pos1">
-	<hr/>
-	<button onclick="reqVeh()">Submit</button>
-	</hr>
-	<table ID="result1"></table>
-	<table ID="result2"></table>
+		<select id="user" size="1">	
+			<option>Doctor</option>
+		    <option>Nurse</option>
+		</select>
+		<select id="type" size="1">
+		  <option>*</option>
+		  <option>WheelChair</option>
+		  <option>Ambulance</option>
+		  <option>Stretcher</option>
+		</select>
+		location:	    <input type="text" id="loc" name="loc1">
+	    position: 		<input type="text" id="pos" name="pos1">
+		<button onclick="reqVeh()">Submit</button>
+		</hr>
+		<table ID="result1"></table>
+		<hr/>
 	</div>
+	
 	<div>
-	<select id="uid" size="1">	
-	 <option value="">-- Select --</option>
-    <hr/>
-    <input type="text" id="command" name="command">
-	<button onclick="commandd()">uid</button>
-	<button onclick="comm2()">Submit</button>
-	<table ID="resultc1"></table>
-	<table ID="resultc2"></table>
+		UID:
+		<select id="uid" size="1">	
+		 <option value="">-- Select --</option>
+		</select>
+		From: <input type="text" id="from">
+		To: <input type="text" id="to">
+		<button onclick="getDir()">Get Directions</button>
+		<button onclick="getUIDs()">get All UIDs</button>
+
+	</div>
+
+	<div>	    
+	    <input type="text" id="command" name="command">
+		<button onclick="command()">Submit</button>
+	    <hr/>
+		
+		<table ID="resultc1"></table>
+		<table ID="resultc2"></table>
 	
 	</div>
    
-	</select>
   </body>
 </html>
