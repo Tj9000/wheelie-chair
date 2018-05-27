@@ -87,6 +87,8 @@ class CarClient:
                     x=self.q.get()
                     print("Done :",i)
 
+            self.client.publish("updateMessages",updMsg,qos=1)
+
 
 
     def startCam(self):
