@@ -14,26 +14,14 @@ class BTvehicle:
     def sendMsg(self,msg,ret):
         self.sendM=ret
         a=msg
-        print("BTvehi/sendMsg:",msg)
-	i=0
         self.s.send(a)
-	i=i+1
 	while(True):
             data=self.s.recv(1024)
             d=data.split()
             if(data):
                 if "Done" in d:
-               	       # if i < len(a):
-                            self.q.put(data)
-                            break
-                        #if i == len(a):
-                           # self.q.put(data)
-                           # break
-        #print('Finished')                
-        #self.s.send(msg)
-        #data = self.s.recv(1024)
-        #if(data):
-           #print data
+                    self.q.put(data)
+                    break
     def connect(self):
         #self.s.send("InitCarASSTauth00010")
         pass

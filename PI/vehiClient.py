@@ -84,17 +84,18 @@ class CarClient:
             m=msg.split()
             if len(m)==1:
                 self.vehi.sendMsg(msg,False)
+                x=self.q.get()
+                print("Done.")
             else:
                 for index,i in enumerate(m):
                     self.vehi.sendMsg(i,True)
-                    if(index==len(m)-1):
-                        break;
+                    #if(index==len(m)-1):
+                    #    break;
                     x=self.q.get()
                     print("Done :",i)
-            print("started updating")
             updMsg=uid+',REACHED'
             self.client.publish("updateMessages",updMsg,qos=1)
-            print("finsihed updating")
+            print("Updated Position")
 
 
     def startCam(self):
