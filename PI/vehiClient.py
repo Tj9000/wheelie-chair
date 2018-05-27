@@ -11,7 +11,7 @@ import Queue
 sys.path.append('./assets')
 
 import findIP
-from ImgPr import camClient
+#from ImgPr import camClient
 
 vehicleData = json.load(open('PI/CONFIG.json'))
 uid     = vehicleData["uid"]
@@ -29,10 +29,11 @@ class CarClient:
         self.HOST=False
         while not self.HOST:
             self.HOST=self.findHost()
-            time.sleep(10)
+            time.sleep(5)
         if(self.HOST=='103'):
             print("Connected to remoteCloud")
         self.client = mqtt.Client()
+        self.client.connect(self.HOST,port=self.PORT,keepalive=1)
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
 
@@ -41,6 +42,7 @@ class CarClient:
         print("Connected with result code "+str(rc))
         # Subscribing in on_connect() means that if we lose the connection and reconnect then subscriptions will be renewed.
         self.client.subscribe("ASST/"+uid)
+        #self.client.publish("ASST/"+uid,"Testing")
         # self.vehi.connect() #currently dont in init itsef
 
     # The callback for when a PUBLISH message is received from the server.
@@ -72,6 +74,7 @@ class CarClient:
         except:
             return False
     def msgParser(self,msg):
+        print("msgParser:",msg)
         if msg=='START_CAM':
             self.startCam()
         elif msg=='STOP_CAM':
@@ -82,13 +85,16 @@ class CarClient:
             if len(m)==1:
                 self.vehi.sendMsg(msg,False)
             else:
-                for i in m:
+                for index,i in enumerate(m):
                     self.vehi.sendMsg(i,True)
+                    if(index==len(m)-1):
+                        break;
                     x=self.q.get()
                     print("Done :",i)
-
+            print("started updating")
+            updMsg=uid+',REACHED'
             self.client.publish("updateMessages",updMsg,qos=1)
-
+            print("finsihed updating")
 
 
     def startCam(self):

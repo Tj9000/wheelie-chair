@@ -14,6 +14,7 @@ class BTvehicle:
     def sendMsg(self,msg,ret):
         self.sendM=ret
         a=msg
+        print("BTvehi/sendMsg:",msg)
 	i=0
         self.s.send(a)
 	i=i+1
