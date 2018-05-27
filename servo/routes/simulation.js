@@ -13,7 +13,7 @@ router.get('/req', function(req, res,next) {
 router.get('/getAllInfo', function(req, res, next) {
 	req.app.get('db').all('SELECT uid,type,position,status,location FROM vehicles', function(err,rows){
 		res.send(JSON.stringify(rows));
-		res.end;
+		res.end();
 	});
 });
 router.get('/getUIDs', function(req, res, next) {
@@ -114,9 +114,22 @@ router.get('/command', function(req, res, next) {
 					          }
 					    });
 					}
+					else{
+						res.status(400);
+			          	res.end()
+					          		
+					}
+				}
+				else{
+					res.status(400);
+		          	res.end()
 				}
 			}
 		});
+	}
+	else{
+		res.status(400);
+      	res.end()
 	}
 });
 

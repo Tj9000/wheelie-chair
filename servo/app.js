@@ -25,6 +25,9 @@ registerClient.on('message', function (topic, message) {
   db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts,function(err){
     if(err){
       db.run('DELETE from vehicles where uid=?',[inserts[0]],function(err){
+        db.run('INSERT INTO vehicles(uid,type,location,status,position) VALUES(?,?,?,?,?)',inserts,function(err){
+            
+          });
         }
       );
         if(!err){
@@ -118,6 +121,6 @@ app.set('DBinit',function(){
 });
 
 app.set('sendMQTTcommand',function(uid,cmd){
-	registerClient.publish('ASST/'+uid,cmd);
+	registerClient.publish('ASST/'+uid,cmd,qos=2);
 });
 module.exports = app;
