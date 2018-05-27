@@ -3,3 +3,4 @@ README.sublime-workspace
 npm-debug.log
 PI/CONFIG.json
 *.pyc
+package-lock.json

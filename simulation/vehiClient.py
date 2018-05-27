@@ -42,6 +42,8 @@ class CarClient:
     # The callback for when a PUBLISH message is received from the server.
     def on_message(self,client, userdata, msg):
         print(msg.topic+" "+str(msg.payload))
+        self.msgParser(msg.payload)
+
         # self.car.sendMsg(str(msg.payload))
 
     def connect(self):
@@ -73,6 +75,19 @@ class CarClient:
     	if msg.payload=='ACCEPTED':
             self.registerComplete=True
             print("ACCEPTED by HOST")
+
+    def msgParser(self,msg):
+        if msg=='START_CAM':
+            self.startCam()
+        elif msg=='STOP_CAM':
+            self.stopCam()
+            pass
+        else:
+            m=msg.split()
+            time.sleep(10)
+            updMsg=uid+",REACHED"
+            self.client.publish("updateMessages",updMsg,qos=1)
+
 
 print(uid,typ,loc,status,pos)
 

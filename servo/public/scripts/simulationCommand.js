@@ -66,55 +66,19 @@ function getUIDs(){
 		
 }
 		
-function command(){
+function commandVehi(){
 	var uid=document.getElementById("uid").value;
 	var command=document.getElementById("command").value;
+	var from=document.getElementById("from").value;
+	var to=document.getElementById("to").value;
 
 	var xhr = new XMLHttpRequest()
-	xhr.open('GET','/sim/command?uid='+uid+'&command=' +command,true);
+	xhr.open('GET','/sim/command?uid='+uid+'&command=' +command+'&from='+from+'&to='+to,true);
 	xhr.send();
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4){	
 			if(xhr.status == 200){
-				var ress =xhr.responseText;	
-
-				/*var dj1=JSON.parse(ress);
-				var tbl = document.getElementById("resultc1");
-				var tblBody = document.createElement("tbody");
-				for(var i=0;i<dj1.length;i++){
-						var row = document.createElement("tr");
-						var cell=document.createElement("td");
-						user1= document.createTextNode(dj1.before.uid );
-						cell.appendChild(user1);
-						row.appendChild(cell);
-						
-						var row = document.createElement("tr");
-						var cell=document.createElement("td");
-						user1= document.createTextNode(dj1.before.command);
-						cell.appendChild(user1);
-						row.appendChild(cell);
-							}
-				tblBody.appendChild(row);					
-				tbl.appendChild(tblBody);
-				
-				var tbl = document.getElementById("resultc2");
-				var tblBody = document.createElement("tbody");
-				for(var i=0;i<dj1.length;i++){
-						var row = document.createElement("tr");
-						var cell=document.createElement("td");
-						user1= document.createTextNode(dj1.after.uid );
-						cell.appendChild(user1);
-						row.appendChild(cell);
-						
-						var row = document.createElement("tr");
-						var cell=document.createElement("td");
-						user1= document.createTextNode(dj1.after.command);
-						cell.appendChild(user1);
-						row.appendChild(cell);
-							}
-				tblBody.appendChild(row);					
-				tbl.appendChild(tblBody);
-				*/
+				// var ress =xhr.responseText;	
 
 			}
 		}	
@@ -148,6 +112,7 @@ function getDir(){
 
 function populateTable(tableID,dataJ={}){
 	var loc=document.getElementById("loc").value;
+	var pos=document.getElementById("pos").value;
 	var tbl = document.getElementById(tableID);
 	tbl.innerHTML='';
 	var tblBody = document.createElement("tbody");
@@ -231,7 +196,7 @@ function populateTable(tableID,dataJ={}){
 			btn= document.createElement("BUTTON")
 			btn.appendChild(document.createTextNode("Request"));
 			btn_click=document.createAttribute("onClick");
-			btn_click.value="sendToLoc("+dataJ[i].uid+",'"+dataJ[i].position+"','"+loc+"')";
+			btn_click.value="sendToLocation('"+dataJ[i].uid+"','"+dataJ[i].position+"','"+pos+"','"+loc+"')";
 			btn.attributes.setNamedItem(btn_click);
 			cell.appendChild(btn);
 			row.appendChild(cell);
@@ -249,7 +214,53 @@ function setUid(uid){
 	document.getElementById('uid').value=uid;
 }
 
-function sendToLoc(uid,src,dest){
-	var xhrSTL = new XMLHttpRequest();
+function sendToLocation(uid,src,dest,location){
+
+	if(src=='X'){
+		var xhr1 = new XMLHttpRequest()
+		xhr1.open('GET','/sim/bringToLocation?uid='+uid+'&from='+src+'&to='+dest+'&loc='+location,true);
+		xhr1.send();
+		xhr1.onreadystatechange=function(){
+			if(xhr1.readyState==4){	
+				if(xhr1.status == 200){
+					
+				}
+			}
+		}
+	}
+	else{
+		var xhrSTL = new XMLHttpRequest();
+		xhrSTL.open('GET', '/sim/direction?from='+src+'&to='+dest);
+		xhrSTL.send();
+		xhrSTL.onreadystatechange=function(){
+			if(xhrSTL.readyState==4){	
+				if(xhrSTL.status == 200){
+					// var res =xhr.responseText;	
+					var command = xhrSTL.responseText;
+					console.log(command)
+					document.getElementById('requestResult').value="Command: "+command;			
+
+
+					var xhr2 = new XMLHttpRequest()
+					xhr2.open('GET','/sim/command?uid='+uid+'&command=' +command+'&from='+src+'&to='+dest,true);
+					xhr2.send();
+					xhr2.onreadystatechange=function(){
+						if(xhr2.readyState==4){	
+							if(xhr2.status == 200){
+								console.log("Sent the command");
+								document.getElementById('requestResult').value+="\nSentCommand";			
+
+							}
+						}
+					}
+				}
+				else{
+					document.getElementById('requestResult').value='command: '+'undefined';			
+
+				}
+			}		
+		}		
+	}
+
 	alert("sent")
 }

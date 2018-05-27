@@ -71,9 +71,12 @@ function getDirections(floor,from,to){
 function getShortestPathFrom(src){
 }
 function getPathCost(floor,a,b) {
+	if(a==b)return 0;
+	// if(a=='X')return Infinity;
 	var Graph = require('node-dijkstra')
 	var route = new Graph(require('../maps/'+floor+'_map'))
 	let cost = 	route.path(a,b,{cost:true}).cost;
+	// console.log(a,b,cost)
 	return cost?cost:Infinity
 }
 

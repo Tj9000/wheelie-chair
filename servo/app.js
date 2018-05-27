@@ -11,12 +11,12 @@ var users = require('./routes/users');
 var simulation = require('./routes/simulation');
 var mqtt = require('mqtt');
 
-var client  = mqtt.connect('mqtt://localhost:10250');
-client.on('connect', function () {
-  client.subscribe({'register':1});
+var registerClient  = mqtt.connect('mqtt://localhost:10250');
+registerClient.on('connect', function () {
+  registerClient.subscribe({'register':1});
   // console.log('subscribed');
 });
-client.on('message', function (topic, message) {
+registerClient.on('message', function (topic, message) {
   // message is Buffer
   var msg=message.toString();
   console.log(msg)
@@ -34,7 +34,27 @@ client.on('message', function (topic, message) {
         }
     }
   });
-  // client.publish("registrationStat/"+inserts[0], "ACCEPTED");
+  // registerClient.publish("registrationStat/"+inserts[0], "ACCEPTED");
+});
+
+var updateClient  = mqtt.connect('mqtt://localhost:10250');
+updateClient.on('connect', function () {
+  updateClient.subscribe({'updateMessages':1});
+  // console.log('subscribed');
+});
+updateClient.on('message', function (topic, message) {
+  // message is Buffer
+  var msg=message.toString();
+  console.log(msg)
+  var inserts = msg.split(',')
+  if(inserts[1]=='REACHED'){
+    inserts.pop();
+    db.run("UPDATE vehicles SET status='AVAIL', position=nextPos WHERE uid=?",inserts,function(err){
+          if(!err){
+            updateClient.publish("updateMessages/"+inserts[0] +" Completed");
+          }
+    });
+  }
 });
 
 
@@ -80,7 +100,7 @@ app.use(function(err, req, res, next) {
 
 app.set('DBinit',function(){
   	db.serialize(function () {
-	  db.run('CREATE TABLE vehicles (uid INTEGER PRIMARY KEY, type TEXT, location TEXT, status TEXT, position TEXT,'+
+	  db.run('CREATE TABLE vehicles (uid INTEGER PRIMARY KEY, type TEXT, location TEXT, status TEXT, position TEXT,nextPos TEXT'+
 	  	'IP TEXT, MAC TEXT,commId TEXT, commType TEXT)');
 	  // var stmt = db.prepare('INSERT INTO vehicles(uid,type,position,status,location) VALUES(?,?,?,?,?)');
 
@@ -98,6 +118,6 @@ app.set('DBinit',function(){
 });
 
 app.set('sendMQTTcommand',function(uid,cmd){
-	client.publish('ASST/'+uid,cmd);
+	registerClient.publish('ASST/'+uid,cmd);
 });
 module.exports = app;
